@@ -1,0 +1,121 @@
+{
+  "name": "bmc-discovery",
+  "label": "BMC Discovery",
+  "description": "BMC Discovery is a data center discovery solution that automatically discovers data center inventory, configuration and relationship data, and maps applications to the IT infrastructure. This connector facilitates automated operation related to run search.",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "Endpoint Security",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "url",
+        "description": "The service-based URL of the BMC Discovery to which you connect and perform the automated operations."
+      },
+      {
+        "title": "Username",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "username",
+        "description": "Username of the BMC Discovery Platform that is used to create an authentication token required to access the API."
+      },
+      {
+        "title": "Password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "password",
+        "description": "Password of the BMC Discovery Platform that is used to create an authentication token required to access the API."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set to True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Run Search",
+      "operation": "search_query",
+      "category": "investigation",
+      "annotation": "search_query",
+      "description": "Retrieves information for an search query from BMC Discovery based on the filter query and input parameters you have specified.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filter Query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "tooltip": "Specify a search query to run, in BMC Discovery query language. Refer this link: https://docs.bmc.com/docs/discovery/113/using-the-query-language-788111625.html",
+          "description": "Specify a search query to run, in BMC Discovery query language. Refer this link: https://docs.bmc.com/docs/discovery/113/using-the-query-language-788111625.html",
+          "placeholder": "e.g. SEARCH Host WHERE os_type = 'Windows' ORDER BY name SHOW name, ram"
+        },
+        {
+          "title": "Result Deleted",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "delete",
+          "tooltip": "(Optional) Controls whether the result set is deleted or not before results are returned.\nResult sets are deleted automatically before the last page of results are returned, but setting this field to true on any page will delete the result set immediately.\nThis is an optimization to free resources if you don't plan on accessing any further pages of data. Alternatively, if set to false, automatic deletion of the result set will not happen (for this request).",
+          "description": "(Optional) Controls whether the result set is deleted or not before results are returned.\nResult sets are deleted automatically before the last page of results are returned, but setting this field to true on any page will delete the result set immediately.\nThis is an optimization to free resources if you don't plan on accessing any further pages of data. Alternatively, if set to false, automatic deletion of the result set will not happen (for this request).",
+          "value": false
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "tooltip": "(Optional) Specify the count of the first few records to skip while retrieving response from BMC Discovery. Note: Can only be supplied if requesting results from an existing results set (by supplying a results_id).",
+          "description": "(Optional) Specify the count of the first few records to skip while retrieving response from BMC Discovery. Note: Can only be supplied if requesting results from an existing results set (by supplying a results_id).",
+          "value": 0
+        },
+        {
+          "title": "Results ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "results_id",
+          "tooltip": "(Optional) An opaque id that can be used to access a result set that has already been generated via a previous search request. Must be supplied if requesting an offset greater than 0.\nNote that even if retrieving results from an existing results set, the original query must be supplied in case the result set has timed out and the query needs to be re-run.\nThe results_id can be found in any page of results apart from the last one.",
+          "description": "(Optional) An opaque id that can be used to access a result set that has already been generated via a previous search request. Must be supplied if requesting an offset greater than 0.\nNote that even if retrieving results from an existing results set, the original query must be supplied in case the result set has timed out and the query needs to be re-run.\nThe results_id can be found in any page of results apart from the last one."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "tooltip": "(Optional) Specify the maximum number of records that you want this operation to fetch from BMC Discovery.",
+          "description": "(Optional) Specify the maximum number of records that you want this operation to fetch from BMC Discovery.",
+          "value": 100
+        }
+      ],
+      "output_schema": {}
+    }
+  ]
+}

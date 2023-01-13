@@ -1,0 +1,120 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - BMC Discovery - 1.0.0",
+      "description": null,
+      "visible": true,
+      "image": null,
+      "uuid": "95eeb8c8-850a-4101-babc-59f8354a8860",
+      "id": 197,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Run Search",
+          "aliasName": null,
+          "tag": null,
+          "description": "Run a search query, receiving paginated results from BMC Discovery.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1673351339,
+          "collection": "/api/3/workflow_collections/95eeb8c8-850a-4101-babc-59f8354a8860",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fcdb9861-0f2c-4a1a-a675-1ce8b29413ab",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Run Search",
+              "description": null,
+              "arguments": {
+                "name": "BMC Discovery",
+                "config": "",
+                "params": {
+                  "limit": 100,
+                  "query": "SEARCH Host WHERE os_type = 'Windows' ORDER BY name SHOW name, ram",
+                  "delete": false,
+                  "offset": 0,
+                  "results_id": ""
+                },
+                "version": "1.0.0",
+                "connector": "bmc-discovery",
+                "operation": "search_query",
+                "operationTitle": "Run Search",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d2c8b8e2-1e76-47ef-a341-11ff8bb0d256"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "11b727ca-5c64-4d4f-9d5b-2e0b7dabd5fb",
+                "title": "BMC Discovery: Run Search",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fcdb9861-0f2c-4a1a-a675-1ce8b29413ab"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Run Search",
+              "targetStep": "/api/3/workflow_steps/d2c8b8e2-1e76-47ef-a341-11ff8bb0d256",
+              "sourceStep": "/api/3/workflow_steps/fcdb9861-0f2c-4a1a-a675-1ce8b29413ab",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6b70977f-efac-49e0-bd0a-75e0f578a57b"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "0811be83-2e20-4f84-a099-27a3a72394bf",
+          "id": 2709,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "bmc-discovery"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "bmc-discovery"
+  ]
+}
