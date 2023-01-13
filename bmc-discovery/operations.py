@@ -10,19 +10,11 @@ from .bmc_api_auth import *
 logger = get_logger('bmc-discovery')
 
 
-def get_token(config, connector_info):
-    try:
-        bmc = BMCAuth(config)
-        token = bmc.validate_token(config, connector_info)
-        return token
-    except Exception as err:
-        raise ConnectorError(err)
-
-
 def make_api_call(config, url, method='GET', params=None, body=None, connector_info=None):
     try:
+        bmc = BMCAuth(config)
         endpoint = config.get('url') + '/api/v1.1' + url
-        token = get_token(config, connector_info)
+        token = bmc.validate_token(config, connector_info)
         headers = {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + token

@@ -10,8 +10,6 @@ from datetime import datetime
 from connectors.core.connector import get_logger, ConnectorError
 from connectors.core.utils import update_connnector_config
 
-CONFIG_SUPPORTS_TOKEN = True
-
 logger = get_logger('bmc-discovery')
 
 
@@ -96,16 +94,15 @@ def acquire_token(self):
 def check(config, connector_info):
     try:
         bmc = BMCAuth(config)
-        if CONFIG_SUPPORTS_TOKEN:
-            if not 'accessToken' in config:
-                token_resp = bmc.generate_token()
-                config['accessToken'] = token_resp.get('accessToken')
-                config['expiresOn'] = token_resp.get('expiresOn')
-                update_connnector_config(connector_info['connector_name'], connector_info['connector_version'], config,
-                                         config['config_id'])
-                return True
-            else:
-                token_resp = bmc.validate_token(config, connector_info)
-                return True
+        if not 'accessToken' in config:
+            token_resp = bmc.generate_token()
+            config['accessToken'] = token_resp.get('accessToken')
+            config['expiresOn'] = token_resp.get('expiresOn')
+            update_connnector_config(connector_info['connector_name'], connector_info['connector_version'], config,
+                                     config['config_id'])
+            return True
+        else:
+            token_resp = bmc.validate_token(config, connector_info)
+            return True
     except Exception as err:
         raise ConnectorError(str(err))

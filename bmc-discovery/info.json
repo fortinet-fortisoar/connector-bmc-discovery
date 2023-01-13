@@ -1,8 +1,8 @@
 {
   "name": "bmc-discovery",
   "label": "BMC Discovery",
-  "description": "BMC Discovery is a data center discovery solution that automatically discovers data center inventory, configuration and relationship data, and maps applications to the IT infrastructure. This connector facilitates automated operation related to",
-  "publisher": "Community",
+  "description": "BMC Discovery is a data center discovery solution that automatically discovers data center inventory, configuration and relationship data, and maps applications to the IT infrastructure. This connector facilitates automated operation related to run search.",
+  "publisher": "Fortinet",
   "cs_approved": false,
   "cs_compatible": true,
   "version": "1.0.0",
@@ -57,7 +57,7 @@
       "operation": "search_query",
       "category": "investigation",
       "annotation": "search_query",
-      "description": "",
+      "description": "Retrieves information for an search query from BMC Discovery based on the filter query and input parameters you have specified.",
       "enabled": true,
       "parameters": [
         {
@@ -67,9 +67,20 @@
           "visible": true,
           "type": "text",
           "name": "query",
-          "tooltip": "Specify a search query to run, in BMC Discovery query language.",
-          "description": "Specify a search query to run, in BMC Discovery query language.",
-          "placeholder": "For e.g. SEARCH Host WHERE os_type = 'Windows' ORDER BY name SHOW name, ram"
+          "tooltip": "Specify a search query to run, in BMC Discovery query language. Refer this link: https://docs.bmc.com/docs/discovery/113/using-the-query-language-788111625.html",
+          "description": "Specify a search query to run, in BMC Discovery query language. Refer this link: https://docs.bmc.com/docs/discovery/113/using-the-query-language-788111625.html",
+          "placeholder": "e.g. SEARCH Host WHERE os_type = 'Windows' ORDER BY name SHOW name, ram"
+        },
+        {
+          "title": "Result Deleted",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "delete",
+          "tooltip": "(Optional) Controls whether the result set is deleted or not before results are returned.\nResult sets are deleted automatically before the last page of results are returned, but setting this field to true on any page will delete the result set immediately.\nThis is an optimization to free resources if you don't plan on accessing any further pages of data. Alternatively, if set to false, automatic deletion of the result set will not happen (for this request).",
+          "description": "(Optional) Controls whether the result set is deleted or not before results are returned.\nResult sets are deleted automatically before the last page of results are returned, but setting this field to true on any page will delete the result set immediately.\nThis is an optimization to free resources if you don't plan on accessing any further pages of data. Alternatively, if set to false, automatic deletion of the result set will not happen (for this request).",
+          "value": false
         },
         {
           "title": "Offset",
@@ -102,17 +113,6 @@
           "tooltip": "(Optional) Specify the maximum number of records that you want this operation to fetch from BMC Discovery.",
           "description": "(Optional) Specify the maximum number of records that you want this operation to fetch from BMC Discovery.",
           "value": 100
-        },
-        {
-          "title": "Result Deleted",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "checkbox",
-          "name": "delete",
-          "tooltip": "(Optional) Controls whether the result set is deleted or not before results are returned.\nResult sets are deleted automatically before the last page of results are returned, but setting this field to true on any page will delete the result set immediately.\nThis is an optimization to free resources if you don't plan on accessing any further pages of data. Alternatively, if set to false, automatic deletion of the result set will not happen (for this request).",
-          "description": "(Optional) Controls whether the result set is deleted or not before results are returned.\nResult sets are deleted automatically before the last page of results are returned, but setting this field to true on any page will delete the result set immediately.\nThis is an optimization to free resources if you don't plan on accessing any further pages of data. Alternatively, if set to false, automatic deletion of the result set will not happen (for this request).",
-          "value": false
         }
       ],
       "output_schema": {}
